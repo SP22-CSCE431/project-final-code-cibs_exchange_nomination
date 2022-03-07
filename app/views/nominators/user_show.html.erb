@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @nominator.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @nominator.last_name %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @nominator.title %>
+</p>
+
+<p>
+  <strong>Nominator email:</strong>
+  <%= @nominator.nominator_email %>
+</p>
+
+<p>
+  <strong>University:</strong>
+  <%= University.find(@nominator.university_id).university_name %>
+</p>
+
+<%= link_to 'Edit', user_edit_nominator_path(@nominator) %> |
+<%= link_to 'Continue', finish_path(@nominator) %>

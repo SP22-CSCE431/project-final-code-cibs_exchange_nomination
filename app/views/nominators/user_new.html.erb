@@ -4,7 +4,7 @@
 <%= link_to "Sign Out", destroy_admin_session_path %>
 <br>
 
-<%= render 'formu', representative: @representative %>
+<%= render 'formu', nominator: @nominator %>
 <!-- Need to redefine create command to link to user_show...
 how to form.submit to user_create vs create?
 might be better to do this based on authentication if/then? -->

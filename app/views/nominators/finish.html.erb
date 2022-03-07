@@ -40,13 +40,13 @@
 
 <p>
   <strong>Number of University Nominations: </strong>
-  <%= University.find(@representative.university_id).num_nominees %>
+  <%= University.find(@nominator.university_id).num_nominees %>
   students nominated out of alloted 
   <%= @max_lim%> nominees
 </p>
 <p>If the maximum number of nominees has been reached, then entering a new student will not be allowed.</p>
 
-<%= link_to 'Enter a new student', user_new_student_path(@representative) %> | 
+<%= link_to 'Enter a new student', user_new_student_path(@nominator) %> | 
 
 <br>
 <br>
@@ -56,27 +56,27 @@
 
 <p>
   <strong>First name:</strong>
-  <%= @representative.first_name %>
+  <%= @nominator.first_name %>
 </p>
 
 <p>
   <strong>Last name:</strong>
-  <%= @representative.last_name %>
+  <%= @nominator.last_name %>
 </p>
 
 <p>
   <strong>Title:</strong>
-  <%= @representative.title %>
+  <%= @nominator.title %>
 </p>
 
 <p>
   <strong>Nominator email:</strong>
-  <%= @representative.rep_email %>
+  <%= @nominator.nominator_email %>
 </p>
 
 <p>
   <strong>University:</strong>
-  <%= University.find(@representative.university_id).university_name %>
+  <%= University.find(@nominator.university_id).university_name %>
 </p>
 
-<%= link_to 'Edit Nominator Info', user_edit_representative_path(@representative) %> |
+<%= link_to 'Edit Nominator Info', user_edit_nominator_path(@nominator) %> |

@@ -59,26 +59,26 @@ RSpec.describe 'Deleting a university', type: :feature do
   end
 end
 
-RSpec.describe 'Creating a representative', type: :feature do
+RSpec.describe 'Creating a nominator', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit new_representative_path
-	click_on 'Create Representative'
+	visit new_nominator_path
+	click_on 'Create nominator'
     expect(page).to have_content('error')
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
     # should error this part without @ but doesn't
-    #fill_in 'Rep email', with: 'JohnSmith'
-    #click_on 'Create Representative'
+    #fill_in 'Nominator email', with: 'JohnSmith'
+    #click_on 'Create nominator'
     #expect(page).to have_content('error')
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-	click_on 'Create Representative'
-    visit representatives_path
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+	click_on 'Create nominator'
+    visit nominators_path
     expect(page).to have_content('John')
     expect(page).to have_content('Smith')
     expect(page).to have_content('CEO')
@@ -86,45 +86,45 @@ RSpec.describe 'Creating a representative', type: :feature do
   end
 end
 
-RSpec.describe 'Editing a representative', type: :feature do
+RSpec.describe 'Editing a nominator', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit new_representative_path
+	visit new_nominator_path
 	select 'AM', :from => 'University'
 	fill_in 'First name', with: 'John'
 	fill_in 'Last name', with: 'Smith'
 	fill_in 'Title', with: 'CEO'
-	fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-	click_on 'Create Representative'
-    visit representatives_path
+	fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+	click_on 'Create nominator'
+    visit nominators_path
     click_on 'Edit'
 	fill_in 'First name', with: ''
-	click_on 'Update Representative'
+	click_on 'Update nominator'
 	expect(page).to have_content('error')
 	fill_in 'First name', with: 'Alice'
-	click_on 'Update Representative'
-	visit representatives_path
+	click_on 'Update nominator'
+	visit nominators_path
 	expect(page).to have_content('Alice')
   end
 end
 
-RSpec.describe 'Deleting a representative', type: :feature do
+RSpec.describe 'Deleting a nominator', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit new_representative_path
+	visit new_nominator_path
 	select 'AM', :from => 'University'
 	fill_in 'First name', with: 'John'
 	fill_in 'Last name', with: 'Smith'
 	fill_in 'Title', with: 'CEO'
-	fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-	click_on 'Create Representative'
-    visit representatives_path
+	fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+	click_on 'Create nominator'
+    visit nominators_path
 	click_on 'Delete'
     expect(page).not_to have_content('John')
   end
@@ -137,18 +137,18 @@ RSpec.describe 'Creating a student', type: :feature do
 	click_on 'Create University'
     visit universities_path
     expect(page).to have_content('AM')
-  visit new_representative_path
+  visit new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-  click_on 'Create Representative'
-    visit representatives_path
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+  click_on 'Create nominator'
+    visit nominators_path
     expect(page).to have_content('JohnSmith@gmail.com')
   visit new_student_path
     select 'AM', :from => 'University'
-    select 'Smith, John', :from => 'Representative'
+    select 'Smith, John', :from => 'nominator'
     fill_in 'First name', with: 'Foo'
     fill_in 'Last name', with: 'Bar'
     select 'Bachelors', :from => 'Degree level'
@@ -174,14 +174,14 @@ RSpec.describe 'Editing a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-  visit new_representative_path
+  visit new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-  click_on 'Create Representative'
-    visit representatives_path
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+  click_on 'Create nominator'
+    visit nominators_path
 	visit new_student_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'Foo'
@@ -190,7 +190,7 @@ RSpec.describe 'Editing a student', type: :feature do
     fill_in 'Major', with: 'Basket Making'
     select 'Fall Only', :from => 'Exchange term'
     fill_in 'Student email', with: 'FooBar@gmail.com'
-    select 'Smith, John', :from => 'Representative'
+    select 'Smith, John', :from => 'nominator'
 	click_on 'Create Student'
     visit students_path
   click_on 'Edit'
@@ -210,14 +210,14 @@ RSpec.describe 'Deleting a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-  visit new_representative_path
+  visit new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-  click_on 'Create Representative'
-    visit representatives_path
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+  click_on 'Create nominator'
+    visit nominators_path
 	visit new_student_path
   select 'AM', :from => 'University'
     fill_in 'First name', with: 'Foo'
@@ -226,7 +226,7 @@ RSpec.describe 'Deleting a student', type: :feature do
     fill_in 'Major', with: 'Basket Making'
     select 'Fall Only', :from => 'Exchange term'
     fill_in 'Student email', with: 'FooBar@gmail.com'
-    select 'Smith, John', :from => 'Representative'
+    select 'Smith, John', :from => 'nominator'
 	click_on 'Create Student'
     visit students_path
 	click_on 'Delete'
@@ -236,21 +236,21 @@ end
 
 ################################### user CRUD functions ###########################
 
-RSpec.describe 'User creating a representative', type: :feature do
+RSpec.describe 'User creating a nominator', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
-    click_on 'Create Representative'
+	visit user_new_nominator_path
+    click_on 'Create nominator'
     expect(page).to have_content('error')
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-  click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+  click_on 'Create nominator'
     expect(page).to have_content('John')
     expect(page).to have_content('Smith')
     expect(page).to have_content('CEO')
@@ -260,25 +260,25 @@ RSpec.describe 'User creating a representative', type: :feature do
   end
 end
 
-RSpec.describe 'User editing a representative', type: :feature do
+RSpec.describe 'User editing a nominator', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_on 'Edit'
     fill_in 'First name', with: ''
-    click_on 'Update Representative'
+    click_on 'Update nominator'
     expect(page).to have_content('error')
     fill_in 'First name', with: 'Alice'
-  click_on 'Update Representative'
+  click_on 'Update nominator'
 	  expect(page).to have_content('Alice')
     expect(page).to have_content('Continue') # expect user_show
   end
@@ -290,13 +290,13 @@ RSpec.describe 'User finish page', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-  click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+  click_on 'Create nominator'
   click_link 'Continue'
     expect(page).to have_content('Finish')
     expect(page).to have_content('John')
@@ -312,17 +312,17 @@ RSpec.describe 'User creating a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
   click_on 'Enter a new student'
     expect(page).not_to have_content('University')
-    expect(page).not_to have_content('Representative')
+    expect(page).not_to have_content('nominator')
     click_on 'Create Student'
     expect(page).to have_content('error')
     fill_in 'First name', with: 'Foo'
@@ -348,13 +348,13 @@ RSpec.describe 'User editing a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
   click_on 'Enter a new student'
     fill_in 'First name', with: 'Foo'
@@ -381,13 +381,13 @@ RSpec.describe 'User deleting a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
   click_on 'Enter a new student'
     fill_in 'First name', with: 'Foo'
@@ -413,13 +413,13 @@ RSpec.describe 'Auto-stop user adding students', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
   expect(page).to have_content('0 students nominated')
   click_on 'Enter a new student' # student 1
@@ -466,13 +466,13 @@ RSpec.describe 'Re-activate new students after delete', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
   click_on 'Enter a new student' # student 1
     fill_in 'First name', with: 'Foo'
@@ -513,13 +513,13 @@ RSpec.describe 'Auto-stop with full students', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'JohnSmith@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
   click_on 'Enter a new student' # student 1
     fill_in 'First name', with: 'Foo'
@@ -545,14 +545,14 @@ RSpec.describe 'Auto-stop with full students', type: :feature do
     select 'Fall Only', :from => 'Exchange term'
     fill_in 'Student email', with: 'Foo3Bar@gmail.com'
     click_on 'Create Student'
-    # start over with new representative
-  visit user_new_representative_path
+    # start over with new nominator
+  visit user_new_nominator_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'Alice'
     fill_in 'Last name', with: 'May'
     fill_in 'Title', with: 'Division Head'
-    fill_in 'Rep email', with: 'A.May@gmail.com'
-    click_on 'Create Representative'
+    fill_in 'Nominator email', with: 'A.May@gmail.com'
+    click_on 'Create nominator'
   click_link 'Continue'
     expect(page).to have_content('Finish')
     expect(page).to have_content('3 students nominated')

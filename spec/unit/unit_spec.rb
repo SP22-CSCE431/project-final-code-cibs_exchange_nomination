@@ -1,11 +1,11 @@
 require 'rails_helper'
 require 'spec_helper'
 
-RSpec.describe Representative, type: :model do
+RSpec.describe Nominator, type: :model do
   subject do
     @uni = University.new(university_name: 'AM')
     @uni.save
-    described_class.new(first_name: 'John', last_name: 'Smith', title: 'CEO', university_id: @uni.id, rep_email: 'JohnSmith@gmail.com')
+    described_class.new(first_name: 'John', last_name: 'Smith', title: 'CEO', university_id: @uni.id, nominator_email: 'JohnSmith@gmail.com')
   end
 
   it 'is valid with all valid attributes' do
@@ -32,8 +32,8 @@ RSpec.describe Representative, type: :model do
     expect(subject).not_to be_valid
   end
   
-  it 'is not valid without a rep_email' do
-    subject.rep_email = nil
+  it 'is not valid without a nominator_email' do
+    subject.nominator_email = nil
     expect(subject).not_to be_valid
   end
 end
@@ -73,7 +73,7 @@ RSpec.describe University, type: :model do
   end
 end
 
-RSpec.describe AnswerChoice, type: :model do
+RSpec.describe Answer, type: :model do
   subject do
     described_class.new(questionID: 1, answer_choice: 'Yes')
   end
@@ -87,9 +87,9 @@ RSpec.describe Student, type: :model do
   subject do
     @uni = University.new(university_name: 'AM')
     @uni.save
-    @rep = Representative.new(first_name: 'John', last_name: 'Smith', title: 'CEO', university_id: @uni.id, rep_email: 'JohnSmith@gmail.com')
-    @rep.save
-    described_class.new(first_name: 'Foo', last_name: 'Bar', university_id: @uni.id, representative_id: @rep.id, student_email: 'FooBar@gmail.com', exchange_term: 'First', degree_level: 'PHD', major: 'Basket Making')
+    @nom = Nominator.new(first_name: 'John', last_name: 'Smith', title: 'CEO', university_id: @uni.id, nominator_email: 'JohnSmith@gmail.com')
+    @nom.save
+    described_class.new(first_name: 'Foo', last_name: 'Bar', university_id: @uni.id, nominator_id: @nom.id, student_email: 'FooBar@gmail.com', exchange_term: 'First', degree_level: 'PHD', major: 'Basket Making')
   end
 
   it 'is valid with all valid attributes' do

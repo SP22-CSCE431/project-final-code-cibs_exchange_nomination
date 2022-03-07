@@ -27,14 +27,14 @@ class StudentsController < ApplicationController
   # GET /students/1 or /students/1.json
   def show
     @student = Student.find(params[:id])
-    @representative = Representative.find(@student.representative_id)
+    @nominator = Nominator.find(@student.nominator_id)
     @university = University.find(@student.university_id)
   end
   
   # GET /students/1/user_show
   def user_show
     @student = Student.find(params[:id])
-    @representative = Representative.find(@student.representative_id)
+    @nominator = Nominator.find(@student.nominator_id)
     @university = University.find(@student.university_id)
     @max_lim = $max_limit.to_i
   end
@@ -47,13 +47,13 @@ class StudentsController < ApplicationController
   # GET /students/user_new
   def user_new
     @student = Student.new
-    @student.representative_id = params[:id]
-    @representative = Representative.find(@student.representative_id)
-    @student.university_id = @representative.university_id
+    @student.nominator_id = params[:id]
+    @nominator = Nominator.find(@student.nominator_id)
+    @student.university_id = @nominator.university_id
     @university = University.find(@student.university_id)
 
     if @university.num_nominees >= $max_limit.to_i
-      redirect_to finish_url(@representative), notice: "Sorry, maximum limit of 3 students already reached." 
+      redirect_to finish_url(@nominator), notice: "Sorry, maximum limit of 3 students already reached." 
     end
   end
 
@@ -144,12 +144,12 @@ class StudentsController < ApplicationController
   def user_destroy
     @student = Student.find(params[:id])
     @university = University.find(@student.university_id)
-    @representative = Representative.find(@student.representative_id)
+    @nominator = Nominator.find(@student.nominator_id)
     @university.update(num_nominees: @university.num_nominees - 1)
     @student.destroy
 
     respond_to do |format|
-      format.html { redirect_to finish_path(@representative), notice: "Student was successfully destroyed." }
+      format.html { redirect_to finish_path(@nominator), notice: "Student was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -163,6 +163,6 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.require(:student).permit(:first_name, :last_name, :university_id, :representative_id, :student_email, :exchange_term, :degree_level, :major)
+      params.require(:student).permit(:first_name, :last_name, :university_id, :nominator_id, :student_email, :exchange_term, :degree_level, :major)
     end
 end

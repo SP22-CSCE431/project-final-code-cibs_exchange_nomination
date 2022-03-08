@@ -585,6 +585,266 @@ end
 
 #admin add new student does not interact with limit
 
+################################### question-answer-response ###########################
+
+RSpec.describe 'Make question', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+    check 'Multi'
+	fill_in 'Prompt', with: ''
+    click_on 'Create Question'
+    expect(page).to have_content('error')
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	visit questions_path
+    expect(page).to have_content('How are you?')
+  end
+end
+
+RSpec.describe 'Edit question', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+    check 'Multi'
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	visit questions_path
+    expect(page).to have_content('How are you?')
+	click_on 'Edit'
+	fill_in 'Prompt', with: ''
+	click_on 'Update Question'
+  expect(page).to have_content('error')
+	fill_in 'Prompt', with: 'Why are you?'
+	click_on 'Update Question'
+	visit questions_path
+    expect(page).to have_content('Why are you?')
+  end
+end
+
+RSpec.describe 'Delete question', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+    check 'Multi'
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	visit questions_path
+    expect(page).to have_content('How are you?')
+	click_on 'Destroy'
+	visit questions_path
+    expect(page).not_to have_content('How are you?')
+  end
+end
+
+RSpec.describe 'Make answer', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+    check 'Multi'
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	visit questions_path
+	click_on 'Show'
+	click_on 'Add Answer'
+	click_on 'New Answer'
+	fill_in 'Choice', with: ''
+	click_on 'Create Answer'
+	expect(page).to have_content('error')
+	fill_in 'Choice', with: 'Good'
+	click_on 'Create Answer'
+	visit questions_path
+	click_on 'Show'
+	expect(page).to have_content('Good')
+  end
+end
+
+RSpec.describe 'Edit answer', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+    check 'Multi'
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	visit questions_path
+	click_on 'Show'
+	click_on 'Add Answer'
+	click_on 'New Answer'
+	fill_in 'Choice', with: 'Good'
+	click_on 'Create Answer'
+	visit questions_path
+	click_on 'Show'
+	expect(page).to have_content('Good')
+	click_on 'Add Answer'
+	click_on 'Edit Choice'
+    fill_in 'Choice', with: ''
+    click_on 'Update Answer'
+    expect(page).to have_content('error')
+	  fill_in 'Choice', with: 'Bad'
+	click_on 'Update Answer'
+	visit questions_path
+	  click_on 'Show'
+    expect(page).to have_content('Bad')
+  end
+end
+
+RSpec.describe 'Delete answer', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+    check 'Multi'
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	visit questions_path
+	click_on 'Show'
+	click_on 'Add Answer'
+	click_on 'New Answer'
+	fill_in 'Choice', with: 'Good'
+	click_on 'Create Answer'
+	visit questions_path
+	click_on 'Show'
+	expect(page).to have_content('Good')
+	click_on 'Add Answer'
+	click_on 'Destroy Choice'
+	visit questions_path
+	  click_on 'Show'
+    expect(page).not_to have_content('Good')
+  end
+end
+
+RSpec.describe 'Make response', type: :feature do
+  scenario 'valid inputs' do 
+  
+    visit new_question_path
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	
+	visit new_university_path
+    fill_in 'University name', with: 'AM'
+	click_on 'Create University'
+    visit universities_path
+	visit user_new_representative_path
+    select 'AM', :from => 'University'
+    fill_in 'First name', with: 'John'
+    fill_in 'Last name', with: 'Smith'
+    fill_in 'Title', with: 'CEO'
+    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    click_on 'Create Representative'
+	
+	click_link 'Continue'
+	click_on 'Enter a new student' # student 1
+    fill_in 'First name', with: 'Foo'
+    fill_in 'Last name', with: 'Bar'
+     select 'Bachelors', :from => 'Degree level'
+    fill_in 'Major', with: 'Basket Making'
+    select 'Fall Only', :from => 'Exchange term'
+    fill_in 'Student email', with: 'FooBar@gmail.com'
+    click_on 'Create Student'
+	
+	visit students_path
+	click_on 'Show'
+	click_on 'Add Response'
+	click_on 'New Response'
+	fill_in 'How are you?', with: ''
+	click_on 'Create Response'
+	expect(page).to have_content('error')
+	fill_in 'How are you?', with: 'Good'
+	click_on 'Create Response'
+	visit students_path
+	click_on 'Show'
+	expect(page).to have_content('Good')
+  end
+end
+
+RSpec.describe 'Edit response', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	
+	visit new_university_path
+    fill_in 'University name', with: 'AM'
+	click_on 'Create University'
+    visit universities_path
+	visit user_new_representative_path
+    select 'AM', :from => 'University'
+    fill_in 'First name', with: 'John'
+    fill_in 'Last name', with: 'Smith'
+    fill_in 'Title', with: 'CEO'
+    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    click_on 'Create Representative'
+	
+	click_link 'Continue'
+	click_on 'Enter a new student' # student 1
+    fill_in 'First name', with: 'Foo'
+    fill_in 'Last name', with: 'Bar'
+     select 'Bachelors', :from => 'Degree level'
+    fill_in 'Major', with: 'Basket Making'
+    select 'Fall Only', :from => 'Exchange term'
+    fill_in 'Student email', with: 'FooBar@gmail.com'
+    click_on 'Create Student'
+	
+	visit students_path
+	click_on 'Show'
+	click_on 'Add Response'
+	click_on 'New Response'
+	fill_in 'How are you?', with: 'Good'
+	click_on 'Create Response'
+	visit students_path
+	click_on 'Show'
+	expect(page).to have_content('Good')
+	click_on 'Add Response'
+	click_on 'Edit Response'
+	fill_in 'How are you?', with: ''
+	click_on 'Update Response'
+	expect(page).to have_content('error')
+	fill_in 'How are you?', with: 'Bad'
+	click_on 'Update Response'
+	visit students_path
+	  click_on 'Show'
+    expect(page).to have_content('Bad')
+  end
+end
+
+RSpec.describe 'Delete response', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_question_path
+	fill_in 'Prompt', with: 'How are you?'
+	click_on 'Create Question'
+	
+	visit new_university_path
+    fill_in 'University name', with: 'AM'
+	click_on 'Create University'
+    visit universities_path
+	visit user_new_representative_path
+    select 'AM', :from => 'University'
+    fill_in 'First name', with: 'John'
+    fill_in 'Last name', with: 'Smith'
+    fill_in 'Title', with: 'CEO'
+    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    click_on 'Create Representative'
+	
+	click_link 'Continue'
+	click_on 'Enter a new student' # student 1
+    fill_in 'First name', with: 'Foo'
+    fill_in 'Last name', with: 'Bar'
+     select 'Bachelors', :from => 'Degree level'
+    fill_in 'Major', with: 'Basket Making'
+    select 'Fall Only', :from => 'Exchange term'
+    fill_in 'Student email', with: 'FooBar@gmail.com'
+    click_on 'Create Student'
+	
+	visit students_path
+	click_on 'Show'
+	click_on 'Add Response'
+	click_on 'New Response'
+	fill_in 'How are you?', with: 'Good'
+	click_on 'Create Response'
+	visit students_path
+	click_on 'Show'
+	expect(page).to have_content('Good')
+	click_on 'Add Response'
+	click_on 'Destroy Response'
+	visit students_path
+	  click_on 'Show'
+    expect(page).not_to have_content('Good')
+  end
+end
+
 
 #admin login
 #test destroy associations

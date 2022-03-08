@@ -147,6 +147,8 @@ RSpec.describe 'Creating a student', type: :feature do
     visit representatives_path
     expect(page).to have_content('JohnSmith@gmail.com')
   visit new_student_path
+    click_on 'Create Student'
+    expect(page).to have_content('error')
     select 'AM', :from => 'University'
     select 'Smith, John', :from => 'Representative'
     fill_in 'First name', with: 'Foo'
@@ -569,8 +571,12 @@ RSpec.describe 'Admin max limit nominees', type: :feature do
   scenario 'valid inputs' do 
     visit admin_path
 	  expect(page).to have_content('3')
+    fill_in 'max_lim', with: '-1'
+    click_on 'Update Limit'
+	  expect(page).to have_content('Admin Home')
+	  expect(page).to have_content('3')
     fill_in 'max_lim', with: '5'
-  click_on 'Update Limit'
+    click_on 'Update Limit'
   visit admin_path
     expect(page).not_to have_content('3')
 	  expect(page).to have_content('5')

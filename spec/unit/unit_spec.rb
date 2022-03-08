@@ -73,7 +73,7 @@ RSpec.describe University, type: :model do
   end
 end
 
-RSpec.describe AnswerChoice, type: :model do
+RSpec.describe Answer, type: :model do
   subject do
     described_class.new(questionID: 1, answer_choice: 'Yes')
   end

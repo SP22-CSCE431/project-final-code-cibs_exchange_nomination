@@ -69,10 +69,10 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
-    @university = University.find(@student.university_id)
 
     respond_to do |format|
       if @student.save
+        @university = University.find(@student.university_id)
         @university.update(num_nominees: @university.num_nominees + 1)
         format.html { redirect_to student_url(@student), notice: "Student was successfully created." }
         format.json { render :show, status: :created, location: @student }

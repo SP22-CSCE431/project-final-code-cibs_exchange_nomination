@@ -107,19 +107,6 @@ class RepresentativesController < ApplicationController
     @max_lim = $max_limit
   end
 
-  def rep_check
-    @representative = Representative.find(params[:id])
-    @university = University.find(@representitive.university_id)
-
-    if @university.num_nominees >= $max_limit
-      redirect_to finish_url(@representative), notice: "Sorry, your university has already reached the maximum limit of 3 student nominees." 
-    else
-      @student = Student.new
-      @student.update(first_name: "", last_name: "", university_id: @representitive.university_id, student_email: "", exchange_term: "", degree_level: "", major: "")
-      edit_student_path(@student)
-    end
-  end
-
   def test_method
     @representative.update(first_name: "Updated")
   end

@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "responses/show", type: :view do
+RSpec.describe 'responses/show', type: :view do
   before(:each) do
     @response = assign(:response, Response.create!(
-      reply: "Reply",
-      question: "",
-      student: ""
-    ))
+                                    reply: 'Reply',
+                                    question: '',
+                                    student: ''
+                                  ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Reply/)
     expect(rendered).to match(//)

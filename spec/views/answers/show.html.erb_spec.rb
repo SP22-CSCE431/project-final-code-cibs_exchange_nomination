@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "answers/show", type: :view do
+RSpec.describe 'answers/show', type: :view do
   before(:each) do
     @answer = assign(:answer, Answer.create!(
-      choice: "Choice",
-      question: ""
-    ))
+                                choice: 'Choice',
+                                question: ''
+                              ))
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
     expect(rendered).to match(/Choice/)
     expect(rendered).to match(//)

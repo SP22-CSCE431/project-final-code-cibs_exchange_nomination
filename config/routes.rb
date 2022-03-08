@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root to: 'dashboards#show'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
@@ -6,10 +8,9 @@ Rails.application.routes.draw do
     get 'admins/sign_out', to: 'admins/sessions#destroy', as: :destroy_admin_session
   end
 
-
   # specific definitions go first or else get overwritten by default definitions
   get 'representatives/user_new', to: 'representatives#user_new', as: 'user_new_representative'
-  get 'representatives/:id/students/user_new/', to: 'students#user_new', as: 'user_new_student' #pass representative id to new student form
+  get 'representatives/:id/students/user_new/', to: 'students#user_new', as: 'user_new_student' # pass representative id to new student form
   get 'representatives/:id/finish/', to: 'representatives#finish', as: 'finish' # finish page
   get 'admin', to: 'students#admin', as: 'admin' # admin home page in student folder for now
   get 'admin/update_max', to: 'students#update_max', as: 'update_max'
@@ -40,11 +41,10 @@ Rails.application.routes.draw do
   resources :representatives
   resources :students
 
-
   resources :responses
   resources :questions do
-	resources :answers
-  #root "dashboards#show"
+    resources :answers
+    # root "dashboards#show"
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

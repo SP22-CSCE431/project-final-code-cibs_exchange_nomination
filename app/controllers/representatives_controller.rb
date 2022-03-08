@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class RepresentativesController < ApplicationController
-  before_action :set_representative, only: %i[ show edit update destroy ]
+  before_action :set_representative, only: %i[show edit update destroy]
 
   # GET /representatives or /representatives.json
   def index
@@ -7,8 +9,7 @@ class RepresentativesController < ApplicationController
   end
 
   # GET /representatives/1 or /representatives/1.json
-  def show
-  end
+  def show; end
 
   # GET /representatives/1/user_show
   def user_show
@@ -26,8 +27,7 @@ class RepresentativesController < ApplicationController
   end
 
   # GET /representatives/1/edit
-  def edit
-  end
+  def edit; end
 
   # GET /representatives/1/user_edit
   def user_edit
@@ -40,7 +40,7 @@ class RepresentativesController < ApplicationController
 
     respond_to do |format|
       if @representative.save
-        format.html { redirect_to representative_url(@representative), notice: "Nominator was successfully created." }
+        format.html { redirect_to representative_url(@representative), notice: 'Nominator was successfully created.' }
         format.json { render :show, status: :created, location: @representative }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -54,7 +54,9 @@ class RepresentativesController < ApplicationController
 
     respond_to do |format|
       if @representative.save
-        format.html { redirect_to user_show_representative_url(@representative), notice: "Nominator was successfully created." }
+        format.html do
+          redirect_to user_show_representative_url(@representative), notice: 'Nominator was successfully created.'
+        end
         format.json { render :show, status: :created, location: @representative }
       else
         format.html { render :user_new, status: :unprocessable_entity }
@@ -67,7 +69,7 @@ class RepresentativesController < ApplicationController
   def update
     respond_to do |format|
       if @representative.update(representative_params)
-        format.html { redirect_to representative_url(@representative), notice: "Nominator was successfully updated." }
+        format.html { redirect_to representative_url(@representative), notice: 'Nominator was successfully updated.' }
         format.json { render :show, status: :ok, location: @representative }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -82,7 +84,9 @@ class RepresentativesController < ApplicationController
 
     respond_to do |format|
       if @representative.update(representative_params)
-        format.html { redirect_to user_show_representative_url(@representative), notice: "Nominator was successfully updated." }
+        format.html do
+          redirect_to user_show_representative_url(@representative), notice: 'Nominator was successfully updated.'
+        end
         format.json { render :show, status: :ok, location: @representative }
       else
         format.html { render :user_edit, status: :unprocessable_entity }
@@ -96,7 +100,7 @@ class RepresentativesController < ApplicationController
     @representative.destroy
 
     respond_to do |format|
-      format.html { redirect_to representatives_url, notice: "Nominator was successfully destroyed." }
+      format.html { redirect_to representatives_url, notice: 'Nominator was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -112,16 +116,18 @@ class RepresentativesController < ApplicationController
     @university = University.find(@representitive.university_id)
 
     if @university.num_nominees >= $max_limit
-      redirect_to finish_url(@representative), notice: "Sorry, your university has already reached the maximum limit of 3 student nominees." 
+      redirect_to finish_url(@representative),
+                  notice: 'Sorry, your university has already reached the maximum limit of 3 student nominees.'
     else
       @student = Student.new
-      @student.update(first_name: "", last_name: "", university_id: @representitive.university_id, student_email: "", exchange_term: "", degree_level: "", major: "")
+      @student.update(first_name: '', last_name: '', university_id: @representitive.university_id, student_email: '',
+                      exchange_term: '', degree_level: '', major: '')
       edit_student_path(@student)
     end
   end
 
   def test_method
-    @representative.update(first_name: "Updated")
+    @representative.update(first_name: 'Updated')
   end
 
   def rep_redirect
@@ -129,13 +135,14 @@ class RepresentativesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_representative
-      @representative = Representative.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def representative_params
-      params.require(:representative).permit(:first_name, :last_name, :title, :university_id,:rep_email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_representative
+    @representative = Representative.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def representative_params
+    params.require(:representative).permit(:first_name, :last_name, :title, :university_id, :rep_email)
+  end
 end

@@ -57,8 +57,16 @@ class StudentsController < ApplicationController
     end
   end
 
+  
+
+
   # GET /students/1/edit
   def edit
+    #@representative = Representative.find(@student.representative_id)
+   # @current_user = Representative.find(params[:id])
+   # if @representative != @current_user
+  #    redirect_to root_path
+   # end
   end
 
   # GET /students/1/user_edit

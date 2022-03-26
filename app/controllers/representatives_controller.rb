@@ -1,6 +1,5 @@
 class RepresentativesController < ApplicationController
   before_action :set_representative, only: %i[ show edit update destroy ]
-
   # GET /representatives or /representatives.json
   def index
     @representatives = Representative.all
@@ -139,4 +138,5 @@ class RepresentativesController < ApplicationController
     def representative_params
       params.require(:representative).permit(:first_name, :last_name, :title, :university_id,:rep_email)
     end
+
 end

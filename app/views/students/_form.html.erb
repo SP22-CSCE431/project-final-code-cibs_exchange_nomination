@@ -1,0 +1,57 @@
+<%= form_with(model: student) do |form| %>
+  <% if student.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+        <% student.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :university_id %>
+    <%= form.select :university_id, University.order(:university_name).map { |university| [university.university_name, university.id] }, include_blank: true, id: "id_of_the_university_id_select_box" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :representative_id %>
+    <%= form.select :representative_id, Representative.order([:last_name, :first_name].join(", ")).map { |representative| [[representative.last_name, representative.first_name].join(", "), representative.id] }, include_blank: true, id: "id_of_the_representative_id_select_box" %>
+  </div>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :degree_level %>
+    <%= form.select :degree_level, [nil,"Bachelors", "Masters"] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :major %>
+    <%= form.text_field :major %>
+  </div>
+
+  <div class="field">
+    <%= form.label :exchange_term %>
+    <%= form.select :exchange_term, [nil,"Fall Only", "Spring Only", "Fall and Spring"] %>
+  </div>
+
+  <div class="field">
+    <%= form.label :student_email %>
+    <%= form.email_field :student_email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

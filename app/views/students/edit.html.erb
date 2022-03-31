@@ -1,0 +1,8 @@
+<% content_for :title, "Edit Student: " + @student.first_name + " " + @student.last_name%>
+
+<h1>Editing Student</h1>
+
+<%= render 'form', student: @student %>
+
+<%= link_to 'Show', @student %> |
+<%= link_to 'Back', University.find(@student.university_id) %>

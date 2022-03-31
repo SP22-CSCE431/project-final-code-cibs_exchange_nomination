@@ -1,5 +1,32 @@
 require 'rails_helper'
 
+RSpec.describe 'Creating a representative', type: :feature do
+  scenario 'valid inputs' do
+    visit new_university_path
+    fill_in 'University name', with: 'AM'
+	click_on 'Create University'
+    visit universities_path
+	visit new_representative_path
+	click_on 'Create Representative'
+    expect(page).to have_content('error')
+    select 'AM', :from => 'University'
+    fill_in 'First name', with: 'John'
+    fill_in 'Last name', with: 'Smith'
+    fill_in 'Title', with: 'CEO'
+    # should error this part without @ but doesn't
+    #fill_in 'Rep email', with: 'JohnSmith'
+    #click_on 'Create Representative'
+    #expect(page).to have_content('error')
+    fill_in "Email", with: 'JohnSmith@gmail.com'
+	click_on 'Create Representative'
+    visit representatives_path
+    expect(page).to have_content('John')
+    expect(page).to have_content('Smith')
+    expect(page).to have_content('CEO')
+    expect(page).to have_content('JohnSmith@gmail.com')
+  end
+end
+
 RSpec.describe 'User deleting a student', type: :feature do
     scenario 'valid inputs' do
       visit new_university_path

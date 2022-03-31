@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :university_id %>
+    <%= form.label :university_id, "University" %>
     <%= form.select :university_id, University.order(:university_name).map { |university| [university.university_name, university.id] }, include_blank: true, id: "id_of_the_university_id_select_box" %>
   </div>
 
@@ -32,7 +32,7 @@
   </div>
 
   <div class="field">
-    <%= form.label :rep_email %>
+    <%= form.label :rep_email, "Email" %>
     <%= form.email_field :rep_email %>
   </div>
 

@@ -21,7 +21,7 @@ RSpec.describe 'Creating a university with num_nominees', type: :feature do
 	click_on 'Create University'
 	expect(page).to have_content('error')
     fill_in 'University name', with: 'AM'
-    fill_in 'Num nominees', with: '2'
+    fill_in 'Maximum number of nominees allowed', with: '2'
 	click_on 'Create University'
     visit universities_path
     expect(page).to have_content('AM')
@@ -40,7 +40,7 @@ RSpec.describe 'Editing a university', type: :feature do
 	click_on 'Update University'
 	expect(page).to have_content('error')
 	fill_in 'University name', with: 'UT'
-  fill_in 'Num nominees', with: '2'
+  fill_in 'Maximum number of nominees allowed', with: '2'
 	click_on 'Update University'
 	visit universities_path
 	expect(page).to have_content('UT')
@@ -76,7 +76,7 @@ RSpec.describe 'Creating a representative', type: :feature do
     #fill_in 'Rep email', with: 'JohnSmith'
     #click_on 'Create Representative'
     #expect(page).to have_content('error')
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
 	click_on 'Create Representative'
     visit representatives_path
     expect(page).to have_content('John')
@@ -97,7 +97,7 @@ RSpec.describe 'Editing a representative', type: :feature do
 	fill_in 'First name', with: 'John'
 	fill_in 'Last name', with: 'Smith'
 	fill_in 'Title', with: 'CEO'
-	fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+	fill_in 'Email', with: 'JohnSmith@gmail.com'
 	click_on 'Create Representative'
     visit representatives_path
     click_on 'Edit'
@@ -122,7 +122,7 @@ RSpec.describe 'Deleting a representative', type: :feature do
 	fill_in 'First name', with: 'John'
 	fill_in 'Last name', with: 'Smith'
 	fill_in 'Title', with: 'CEO'
-	fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+	fill_in 'Email', with: 'JohnSmith@gmail.com'
 	click_on 'Create Representative'
     visit representatives_path
 	click_on 'Delete'
@@ -142,7 +142,7 @@ RSpec.describe 'Creating a student', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
   click_on 'Create Representative'
     visit representatives_path
     expect(page).to have_content('JohnSmith@gmail.com')
@@ -181,7 +181,7 @@ RSpec.describe 'Editing a student', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
   click_on 'Create Representative'
     visit representatives_path
 	visit new_student_path
@@ -217,7 +217,7 @@ RSpec.describe 'Deleting a student', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
   click_on 'Create Representative'
     visit representatives_path
 	visit new_student_path
@@ -251,7 +251,7 @@ RSpec.describe 'User creating a representative', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
   click_on 'Create Representative'
     expect(page).to have_content('John')
     expect(page).to have_content('Smith')
@@ -273,7 +273,7 @@ RSpec.describe 'User editing a representative', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_on 'Edit'
     fill_in 'First name', with: ''
@@ -297,7 +297,7 @@ RSpec.describe 'User finish page', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
   click_on 'Create Representative'
   click_link 'Continue'
     expect(page).to have_content('Finish')
@@ -319,7 +319,7 @@ RSpec.describe 'User creating a student', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_link 'Continue'
   click_on 'Enter a new student'
@@ -355,7 +355,7 @@ RSpec.describe 'User editing a student', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_link 'Continue'
   click_on 'Enter a new student'
@@ -388,7 +388,7 @@ RSpec.describe 'User deleting a student', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_link 'Continue'
   click_on 'Enter a new student'
@@ -420,7 +420,7 @@ RSpec.describe 'Auto-stop user adding students', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_link 'Continue'
   expect(page).to have_content('0 students nominated')
@@ -473,7 +473,7 @@ RSpec.describe 'Re-activate new students after delete', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_link 'Continue'
   click_on 'Enter a new student' # student 1
@@ -520,7 +520,7 @@ RSpec.describe 'Auto-stop with full students', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
   click_link 'Continue'
   click_on 'Enter a new student' # student 1
@@ -722,7 +722,7 @@ RSpec.describe 'Make response', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
 	
 	click_link 'Continue'
@@ -765,7 +765,7 @@ RSpec.describe 'Edit response', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
 	
 	click_link 'Continue'
@@ -815,7 +815,7 @@ RSpec.describe 'Delete response', type: :feature do
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
     fill_in 'Title', with: 'CEO'
-    fill_in 'Rep email', with: 'JohnSmith@gmail.com'
+    fill_in 'Email', with: 'JohnSmith@gmail.com'
     click_on 'Create Representative'
 	
 	click_link 'Continue'

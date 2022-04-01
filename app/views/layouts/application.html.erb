@@ -43,7 +43,17 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #500000;">
           <div class="container-fluid" style="margin-top: 10px; margin-bottom: 5px">
-            <a class = "image-shadow" href="https://mays.tamu.edu/" target="_blank"><h3 class="text-logo"> <%=image_tag("A&M White Logo.png", size: "80x70")%>   TEXAS A&M UNIVERSITY</h3></a>
+            <a class = "image-shadow" href="https://mays.tamu.edu/" target="_blank">
+              <div class = "row">
+                <div class="col-sm-auto">
+                  <%=image_tag("A&M White Logo.png", size: "80x70")%>
+                </div>
+                <div class="col-md" style="text-decoration: none;">
+                  <h3 class="text-logo" style="font-size: 20px;">TEXAS A&M UNIVERSITY</h3>
+                  <h1 class="text-logo" style="">Mays Business School</h1>
+                </div>
+              </div>
+            </a>
           </div>
         </nav>
     </header>

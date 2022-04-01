@@ -3,9 +3,18 @@
 <h1>Admin Home Page</h1>
 
 <br>
+<%= button_to "Universities", universities_path, :class => "data-button", :method => :get %>
+<br>
+<%= button_to 'Representatives', representatives_path, :class => "data-button", :method => :get %>
+<br>
+<%= button_to 'Students', students_path, :class => "data-button", :method => :get %>
+<br>
+<%= button_to 'Questions', questions_path, :class => "data-button", :method => :get %>
+<br>
+<br>
 
 <p>
-Max Number of Nominees: 
+Max Number of Nominees:
 <%= @max_lim %>
 </p>
 
@@ -15,16 +24,6 @@ Max Number of Nominees:
   <input name="commit" type="submit" value="Update Limit" />
 </form>
 
-<br>
-<br>
-
-<%= link_to 'Universities', universities_path %>
-<br>
-<%= link_to 'Representatives', representatives_path %>
-<br>
-<%= link_to 'Students', students_path %>
-<br>
-<%= link_to 'Questions', questions_path %>
 <br>
 <br>
 

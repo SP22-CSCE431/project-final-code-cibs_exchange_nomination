@@ -78,6 +78,19 @@ a, a:hover {
   color: #504444;
 }
 
+.new-navbar-box {
+  height: 35px;
+  width: 225px;
+  background-color: #3C0000;
+  color: #CFCFCF;
+  border: none;
+}
+
+.new-navbar-box:hover {
+  background-color: #500000;
+  text-decoration: none;
+}
+
 html {
   height: 100%;
 }

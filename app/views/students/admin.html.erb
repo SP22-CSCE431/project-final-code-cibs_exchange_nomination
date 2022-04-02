@@ -26,6 +26,36 @@
     line-height: 25px;
   }
 
+  #limit-input-field {
+    margin-top: 25px;
+  }
+
+  .update-buton {
+    border: none;
+    color: white;
+    width: 225px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: #598C9B;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0px 6px 8px 2px rgba(0,0,0,0.35);
+  }
+
+  input[type=submit] {
+    width: 225px;
+    background-color: #598C9B;
+    border:0 none;
+    cursor:pointer;
+    color:white;
+    border-radius: 8px;
+    box-shadow: 0px 3px 4px 2px rgba(0,0,0,0.35);
+}
+
 </style>
 
 <p id="notice"><%= notice %></p>
@@ -65,14 +95,14 @@
       </div>
     </div>
     <div class="col-sm">
-      <div class="update-nominee-count" style="padding-top: 45px; margin-right: auto;">
+      <div class="update-nominee-count" style="padding-top: 45px; padding-bottom: 45px margin-right: auto;">
         <div style="margin-left: auto; margin-right: auto; text-align:center;">
-          <p class="nominee-count-text" style = "font-size: 24px; color: black">Update Nominee Limit</p>
-          <div class="">
+          <p class="nominee-count-text" style = "font-size: 24px; color:black">Update Nominee Limit</p>
+          <div>
             <form action="/admin/update_max" method="get" accept-charset="UTF-8" >
-              <label for="max_lim">Update to:</label>
+              <label id="limit-input-field" for="max_lim">Update to:</label>
               <input id="max_lim" name="max_lim" type="number" />
-              <input name="commit" type="submit" value="Update Limit" />
+              <input class="update-button" id="limit-input-field" name="commit" type="submit" value="Update Limit" />
             </form>
         </div>
       </div>

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :holds
   resources :authorizeds
   root to: 'representatives#user_new'
   devise_for :admins, controllers: { omniauth_callbacks: 'admins/omniauth_callbacks' }
@@ -46,10 +47,17 @@ Rails.application.routes.draw do
     end
   end
 
-  # default definitions and root
   resources :responses
+
   resources :questions do
 	  resources :answers
+  end
+
+  resources :holds do
+    member do
+      get :submit
+      get :cancel_submit
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

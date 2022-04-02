@@ -51,6 +51,7 @@ class RepresentativesController < ApplicationController
 
   def user_create
     @representative = Representative.new(representative_params)
+    puts "This is the rep_params: #{representative_params}"
 
     respond_to do |format|
       if @representative.save

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_01_025847) do
+ActiveRecord::Schema.define(version: 2022_04_02_171817) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,27 @@ ActiveRecord::Schema.define(version: 2022_04_01_025847) do
     t.string "authorized_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "holds", force: :cascade do |t|
+    t.integer "user_id"
+    t.text "type"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "university_id"
+    t.string "student_email"
+    t.string "exchange_term"
+    t.string "degree_level"
+    t.string "major"
+    t.integer "representative_id"
+    t.string "title"
+    t.string "rep_email"
+    t.string "reply"
+    t.integer "question_id"
+    t.bigint "student_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["student_id"], name: "index_holds_on_student_id"
   end
 
   create_table "questions", force: :cascade do |t|

@@ -1,28 +1,84 @@
+<style>
+  .current-nominee-count {
+    height: 250px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 24px;
+    background-color: #E7E1D4;
+  }
+
+  .update-nominee-count {
+    height: 250px;
+    width: 300px;
+    display: flex;
+    flex-direction: row;
+    box-shadow: 1px 1px 5px black;
+    border-radius: 24px;
+    background-color: #F3F8FA;
+  }
+
+  .nominee-count-text {
+    font-family: 'Helvetica Neue LT Std';
+    color: #504444;
+    font-size: 32px;
+    line-height: 25px;
+  }
+
+</style>
+
 <p id="notice"><%= notice %></p>
 
 <h1>Admin Home Page</h1>
 
 <br>
-<%= button_to "Universities", universities_path, :class => "data-button", :method => :get %>
-<br>
-<%= button_to 'Representatives', representatives_path, :class => "data-button", :method => :get %>
-<br>
-<%= button_to 'Students', students_path, :class => "data-button", :method => :get %>
-<br>
-<%= button_to 'Questions', questions_path, :class => "data-button", :method => :get %>
+
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-sm-auto">
+      <%= button_to "Universities", universities_path, :class => "data-button", :method => :get %>
+    </div>
+    <div class="col-sm-auto">
+      <%= button_to 'Representatives', representatives_path, :class => "data-button", :method => :get %>
+    </div>
+    <div class="col-sm-auto">
+      <%= button_to 'Students', students_path, :class => "data-button", :method => :get %>
+    </div>
+    <div class="col-sm-auto">
+      <%= button_to 'Questions', questions_path, :class => "data-button", :method => :get %>
+    </div>
+  </div>
+</div>
 <br>
 <br>
 
-<p>
-Max Number of Nominees:
-<%= @max_lim %>
-</p>
-
-<form action="/admin/update_max" method="get" accept-charset="UTF-8" >
-  <label for="max_lim">Update to:</label>
-  <input id="max_lim" name="max_lim" type="number" />
-  <input name="commit" type="submit" value="Update Limit" />
-</form>
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-sm">
+      <div class="current-nominee-count" style="padding-top: 15px; margin-left: auto;">
+        <div style="margin-left: auto; margin-right: auto; text-align:center;">
+          <%=image_tag("person pictogram.png", size: "140x100")%>
+          <p class="nominee-count-text"><%= @max_lim %></p>
+          <p class="nominee-count-text" style = "font-size: 24px;">Max Number of Nominees</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm">
+      <div class="update-nominee-count" style="padding-top: 45px; margin-right: auto;">
+        <div style="margin-left: auto; margin-right: auto; text-align:center;">
+          <p class="nominee-count-text" style = "font-size: 24px; color: black">Update Nominee Limit</p>
+          <div class="">
+            <form action="/admin/update_max" method="get" accept-charset="UTF-8" >
+              <label for="max_lim">Update to:</label>
+              <input id="max_lim" name="max_lim" type="number" />
+              <input name="commit" type="submit" value="Update Limit" />
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <br>
 <br>

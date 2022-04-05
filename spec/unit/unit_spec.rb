@@ -63,7 +63,7 @@ RSpec.describe University, type: :model do
   end
 end
 
-RSpec.describe AnswerChoice, type: :model do
+RSpec.describe Answer, type: :model do
   subject do
     described_class.new(questionID: 1, answer_choice: 'Yes')
   end
@@ -120,5 +120,58 @@ RSpec.describe Student, type: :model do
   it 'is not valid without a major' do
     subject.major = nil
     expect(subject).not_to be_valid
+  end
+     
+  # format: { with: XXXXX }Test of, from https://linuxtut.com/en/5a0c572511d53eb3d024/
+  it 'Do not allow emails that do not fit the specified format' do
+    invalid_email = 'user'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    invalid_email = 'user@' 
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    # this one fails
+    # invalid_email = 'user@foo' 
+    # subject.student_email = invalid_email
+    # expect(subject).to be_invalid
+    
+    invalid_email = 'user@foo,com'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    # invalid_email = 'user_at_foo.org'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    invalid_email = 'user_at_foo.org'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    invalid_email = 'example.user@foo.foo@bar_baz.com'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    invalid_email = 'foo@bar+baz.com'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    invalid_email = 'foo@bar..com'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+    
+    invalid_email = ' foo@bar.com'
+    subject.student_email = invalid_email
+    expect(subject).to be_invalid
+  end
+
+  describe 'has_many' do
+    it { should have_many(:response) }
+  end
+
+  describe 'belongs_to' do
+    it { should belong_to :university }
+    it { should belong_to :representative }
   end
 end

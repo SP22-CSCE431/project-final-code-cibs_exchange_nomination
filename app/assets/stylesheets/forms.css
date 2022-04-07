@@ -1,5 +1,3 @@
-
 body {
-  background-image: url("<%= asset_path('jimmy.jpg') %>");
-  background-repeat: repeat;
+  background: #500000;
 }

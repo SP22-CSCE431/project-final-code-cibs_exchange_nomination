@@ -6,13 +6,16 @@
   <strong>University name:</strong>
   <%= @university.university_name %>
   <br>
-  <strong>Number of Nominees:</strong>
+  <strong>Number of submitted nominees:</strong>
   <%= @university.num_nominees %>
+  <br>
+  <strong>Nominee submission limit:</strong>
+  <%= @university.max_limit %>
 </p>
 
 <br>
 
-<p style="font-size:130%;">Representatives for this University:</p>
+<p style="font-size:130%;">Nominators for this University:</p>
 
 <table>
   <thead>
@@ -40,11 +43,8 @@
   </tbody>
 </table>
 
-<%= link_to 'Add Representative', new_representative_path %>
-
-<br>
-<br>
-
+<%= link_to 'Add Nominator', new_representative_path %>
+<br><br>
 
 <p style="font-size:130%;">Student Nominees for this University:</p>
 
@@ -53,7 +53,7 @@
     <tr>
       <th>First name</th>
       <th>Last name</th>
-      <th>Representative</th>
+      <th>Nominator</th>
       <th>Degree level</th>
       <th>Major/Area of Study</th>
       <th>Term of exchange</th>
@@ -81,8 +81,8 @@
 </table>
 
 <%= link_to 'Add Student', new_student_path %>
+<br><br>
 
-<br>
-<br>
-
+<%= link_to 'Edit', edit_university_path(@university) %> | 
+<%= link_to 'Delete', delete_university_path(@university) %> | 
 <%= link_to 'Back to Universities', universities_path %>

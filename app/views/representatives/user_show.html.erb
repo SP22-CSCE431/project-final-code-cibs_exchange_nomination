@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<div style="text-align: right"><%= link_to 'Help', user_help_path %></div>
 
 <p>
   <strong>First name:</strong>
@@ -16,7 +17,7 @@
 </p>
 
 <p>
-  <strong>Representive email:</strong>
+  <strong>Nominator email:</strong>
   <%= @representative.rep_email %>
 </p>
 
@@ -26,4 +27,4 @@
 </p>
 
 <%= link_to 'Edit', user_edit_representative_path(@representative) %> |
-<%= link_to 'Continue', finish_path(@representative) %>
+<%= link_to 'Continue', finish_representative_path(@representative) %>

@@ -1,11 +1,13 @@
 <p id="notice"><%= notice %></p>
+<div style="text-align: right"><%= link_to 'Help', admin_help_path %></div>
 
-<h1>Representatives</h1>
+<h1>Nominators</h1>
 <br>
 
-<%= link_to 'Universities', universities_path %> |
-<%= link_to 'Representatives', representatives_path %> |
-<%= link_to 'Students', students_path %>
+<%= link_to 'Universities', universities_path %> | 
+<%= link_to 'Nominators', representatives_path %> | 
+<%= link_to 'Students', students_path %> | 
+<%= link_to 'Questions', questions_path %>
 <br>
 <br>
 
@@ -27,13 +29,11 @@
         <td><%= representative.first_name %></td>
         <td><%= representative.last_name %></td>
         <td><%= representative.title %></td>
-        <td>Bruh uni</td>
-        <%# Another error
-        <%# <td><%= University.find(representative.university_id).university_name %> <%#</td> %>
+        <td><%= University.find(representative.university_id).university_name %></td>
         <td><%= representative.rep_email %></td>
         <td class="actions"><%= link_to("Show", representative_path(representative), :class => 'action show') %></td>
         <td><%= link_to 'Edit', edit_representative_path(representative) %></td>
-        <td><%= link_to 'Delete', representative, method: :delete %></td>
+        <td><%= link_to 'Delete', delete_representative_path(representative) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -41,7 +41,8 @@
 
 <br>
 
-<%= link_to 'New Representative', new_representative_path %>
+<%= link_to 'New Nominator', new_representative_path %> | 
+<%= link_to 'Clear All', clear_all_representatives_path %>
 <br>
 <br>
-<%= link_to 'Back', admin_path %>
+<%= link_to 'Back to Admin', admin_path %>

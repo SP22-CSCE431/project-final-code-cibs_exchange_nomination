@@ -7,7 +7,7 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%# <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <style>
       .flash__alert   { color: red; }
       .flash__notice  { color: blue; }
@@ -40,11 +40,11 @@
         }
     </style>
 
-  </head>
+</head>
 
 <body class="background">
-
   <div class="main-body">
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #500000;">
           <div class="container-fluid" style="margin-top: 10px; margin-bottom: 5px">
@@ -76,15 +76,12 @@
           </div>
         </nav>
     </header>
-
     <% if flash.any? %>
       <% flash.each do |key, value| -%>
         <section class="flash flash__<%= key %>"><%= value.html_safe %></section>
       <% end -%>
     <% end %>
-
     <%= yield %>
-
   </div>
 </body>
 </html>

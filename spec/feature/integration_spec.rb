@@ -2,7 +2,7 @@ require 'rails_helper'
 
 ################################### admin CUD functions ###########################
 
-RSpec.describe 'Creating a university', type: :feature do
+RSpec.describe 'Creating a university with defaults', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
 	click_on 'Create University'
@@ -15,17 +15,19 @@ RSpec.describe 'Creating a university', type: :feature do
   end
 end
 
-RSpec.describe 'Creating a university with num_nominees', type: :feature do
+RSpec.describe 'Creating a university', type: :feature do
   scenario 'valid inputs' do
     visit new_university_path
 	click_on 'Create University'
 	expect(page).to have_content('error')
     fill_in 'University name', with: 'AM'
     fill_in 'Num nominees', with: '2'
+    fill_in 'Max limit', with: '17'
 	click_on 'Create University'
     visit universities_path
     expect(page).to have_content('AM')
     expect(page).to have_content('2')
+    expect(page).to have_content('17')
   end
 end
 
@@ -34,17 +36,19 @@ RSpec.describe 'Editing a university', type: :feature do
     visit new_university_path
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
-    visit universities_path
-    click_on 'Edit'
-	fill_in 'University name', with: ''
+  visit universities_path
+  click_on 'Edit'
+    fill_in 'University name', with: ''
+    click_on 'Update University'
+    expect(page).to have_content('error')
+    fill_in 'University name', with: 'UT'
+    fill_in 'Num nominees', with: '2'
+    fill_in 'Max limit', with: '17'
 	click_on 'Update University'
-	expect(page).to have_content('error')
-	fill_in 'University name', with: 'UT'
-  fill_in 'Num nominees', with: '2'
-	click_on 'Update University'
-	visit universities_path
-	expect(page).to have_content('UT')
-  expect(page).to have_content('2')
+	  visit universities_path
+    expect(page).to have_content('UT')
+    expect(page).to have_content('2')
+    expect(page).to have_content('17')
   end
 end
 
@@ -242,7 +246,7 @@ RSpec.describe 'User creating a representative', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     click_on 'Create Representative'
     expect(page).to have_content('error')
     select 'AM', :from => 'University'
@@ -266,7 +270,7 @@ RSpec.describe 'User editing a representative', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -290,7 +294,7 @@ RSpec.describe 'User finish page', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -312,7 +316,7 @@ RSpec.describe 'User creating a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -348,7 +352,7 @@ RSpec.describe 'User editing a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -381,7 +385,7 @@ RSpec.describe 'User deleting a student', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -413,7 +417,7 @@ RSpec.describe 'Auto-stop user adding students', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -466,7 +470,7 @@ RSpec.describe 'Re-activate new students after delete', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -513,7 +517,7 @@ RSpec.describe 'Auto-stop with full students', type: :feature do
     fill_in 'University name', with: 'AM'
 	click_on 'Create University'
     visit universities_path
-	visit user_new_representative_path
+	visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
@@ -546,7 +550,7 @@ RSpec.describe 'Auto-stop with full students', type: :feature do
     fill_in 'Student email', with: 'Foo3Bar@gmail.com'
     click_on 'Create Student'
     # start over with new representative
-  visit user_new_representative_path
+  visit user_new_representatives_path
     select 'AM', :from => 'University'
     fill_in 'First name', with: 'Alice'
     fill_in 'Last name', with: 'May'
@@ -565,15 +569,36 @@ RSpec.describe 'Auto-stop with full students', type: :feature do
   end
 end
 
-RSpec.describe 'Admin max limit nominees', type: :feature do
+RSpec.describe 'University update max limit nominees', type: :feature do
   scenario 'valid inputs' do 
-    visit admin_path
+    visit universities_path
 	  expect(page).to have_content('3')
+    fill_in 'max_lim', with: '-1'
+    click_on 'Update Default Limit'
+	  expect(page).to have_content('cannot be negative')
     fill_in 'max_lim', with: '5'
-  click_on 'Update Limit'
-  visit admin_path
+  click_on 'Update Default Limit'
+  visit universities_path
     expect(page).not_to have_content('3')
 	  expect(page).to have_content('5')
+	  expect(page).to have_content('successful')
+  end
+end
+
+RSpec.describe 'University change all max limits', type: :feature do
+  scenario 'valid inputs' do 
+    visit new_university_path
+    fill_in 'University name', with: 'AM'
+	click_on 'Create University'
+    fill_in 'change_lim', with: '-1'
+    click_on 'Change All Limits'
+	  expect(page).to have_content('cannot be negative')
+    fill_in 'change_lim', with: '5'
+  click_on 'Change All Limits'
+  visit universities_path
+    expect(page).not_to have_content('3')
+	  expect(page).to have_content('5')
+	  expect(page).to have_content('successful')
   end
 end
 

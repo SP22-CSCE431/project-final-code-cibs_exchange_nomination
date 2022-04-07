@@ -6,7 +6,7 @@ RSpec.describe 'User deleting a student', type: :feature do
       fill_in 'University name', with: 'AM'
       click_on 'Create University'
       visit universities_path
-      visit user_new_representative_path
+      visit user_new_representatives_path
       select 'AM', :from => 'University'
       fill_in 'First name', with: 'John'
       fill_in 'Last name', with: 'Smith'
@@ -70,5 +70,13 @@ RSpec.describe 'Creating a university with num_nominees', type: :feature do
     visit universities_path
     expect(page).to have_content('AM')
     expect(page).to have_content('2')
+  end
+end
+
+RSpec.describe 'Google sign-in', type: :feature do
+  scenario 'valid inputs' do
+    visit root_path
+    expect(page).to have_content('TAMU')
+    click_on 'Admin Sign in'
   end
 end

@@ -9,9 +9,9 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <style>
-      .flash__alert   { color: red; }
-      .flash__notice  { color: blue; }
-      .flash__success { color: green; }
+      .flash__alert   { color: red; background-color: #3C0000;}
+      .flash__notice  { color: blue; background-color: #3C0000;}
+      .flash__success { color: green; background-color: #3C0000;}
     </style>
 
     <!-- Required meta tags -->
@@ -48,7 +48,7 @@
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #500000;">
           <div class="container-fluid" style="margin-top: 10px; margin-bottom: 5px">
-            <a class = "image-shadow" href="https://mays.tamu.edu/" target="_blank">
+            <a class = "image-shadow" href="https://mays.tamu.edu/" target="_blank" style="text-decoration:none">
               <div class = "row">
                 <div class="col-sm-auto">
                   <%=image_tag("A&M White Logo.png", size: "80x70")%>
@@ -59,7 +59,7 @@
                 </div>
               </div>
             </a>
-            <a class="mr-sm-2" href="https://mays.tamu.edu/center-for-international-business-studies/" target="_blank" style="text-shadow: -2px 3px 5px #000000">
+            <a class="mr-sm-2" href="https://mays.tamu.edu/center-for-international-business-studies/" target="_blank" style="text-shadow: -2px 3px 5px #000000; text-decoration:none;">
               <div class = "row justify-content-end">
                 <div class="col-sm-auto">
                   <h1 class="cibs-text" style="font-style: italic; font-size: 60px;">CIBS</h1>

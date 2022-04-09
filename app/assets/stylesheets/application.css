@@ -171,6 +171,7 @@ a, a:hover {
 }
 
 .show-button {
+  font-family: 'Helvetica Neue LT Std';
   border: none;
   width: auto;
   height: auto;

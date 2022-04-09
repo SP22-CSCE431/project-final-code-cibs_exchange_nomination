@@ -16,7 +16,7 @@
   <div class="container show-box">
     <%= form_with url: destroy_all_questions_url do |f| %>
 
-      <p>Are you sure you want to permanently delete all questions?</p>
+      <h2 style="text-align: center;">Are you sure you want to permanently delete all questions?</h2>
 
       <p>Prompt: <%= @question.prompt %> </p>
       <% if @question.multi %>

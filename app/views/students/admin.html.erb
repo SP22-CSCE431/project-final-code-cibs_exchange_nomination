@@ -47,6 +47,56 @@
   .update-deadline:hover {
     background-color: #59A4BB;
   }
+
+  .bottom-buttons {
+    border: none;
+    width: 200px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background-color: #598C9B;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0px 6px 8px 2px rgba(0,0,0,0.35);
+  }
+
+  .bottom-buttons:hover {
+    background-color: #65ACFF;
+    text-decoration: none;
+  }
+
+  .download-button {
+    border: none;
+    width: 225px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    background: url("<%= asset_path('alt download pictogram.png') %>");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: #598C9B;
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0px 6px 8px 2px rgba(0,0,0,0.35);
+  }
+
+  .download-button:hover {
+    background-color: #65ACFF;
+    text-decoration: none;
+  }
 </style>
 
 <header style="margin-top: 0;">
@@ -130,16 +180,15 @@
 
   <br>
 
-  <%= link_to 'Universities', universities_path %>
-  <br>
-  <%= link_to 'Nominators', representatives_path %>
-  <br>
-  <%= link_to 'Students', students_path %>
-  <br>
-  <%= link_to 'Questions', questions_path %>
-  <br>
-  <%= link_to 'Admin list', authorizeds_path %>
-  <br>
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-sm-auto">
+        <%= button_to "Admin List", authorizeds_path, :class => "bottom-buttons", :method => :get %>
+      </div>
+      <div class="col-sm-auto">
+          <%= button_to 'Export Students (.csv)', export_students_path, :class => "download-button", :method => :get %>
+      </div>
+    </div>
+  </div>
 
-  <%= link_to 'Export Students', export_students_path %>
 </div>

@@ -1,3 +1,13 @@
+<header style="margin-top: 0;">
+  <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3C0000; padding-top: 0;padding-bottom: 0;">
+    <div class = "row" style="height:35px; padding-bottom: 0;">
+      <div class="col-sm-auto" style="margin-bottom: 0;">
+        <%= button_to "Back to Questions", questions_path, :class => "new-navbar-box", :method => :get %>
+      </div>
+    </div>
+  <nav>
+</header>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -19,5 +29,4 @@
 	<%= link_to 'Add Answer', question_answers_path(@question) %>
 <% end %>
 <%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Delete', delete_question_path(@question) %> |
-<%= link_to 'Back to Questions', questions_path %>
+<%= link_to 'Delete', delete_question_path(@question) %>

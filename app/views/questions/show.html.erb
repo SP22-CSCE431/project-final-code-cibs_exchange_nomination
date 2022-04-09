@@ -27,7 +27,7 @@
         <% for answer in @question.answer %>
     		  <li style="margin-bottom: 10px;"><%= answer.choice %></li>
   	     <% end %>
-        </ol>
+      </ol>
       <div class="row">
         <%= button_to "Add Answer", question_answers_path(@question), :class => "create-new-item-button", :method => :get %>
       </div>

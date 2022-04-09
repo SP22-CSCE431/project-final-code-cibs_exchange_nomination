@@ -81,48 +81,40 @@
 
   <br>
 
-  <table>
-    <thead>
-      <tr>
-        <th>University</th>
-        <th>Nominees</th>
-        <th>Limit</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <table class="table center">
+        <thead class="thread-dark">
+          <tr>
+            <th>University</th>
+            <th>Nominees</th>
+            <th>Limit</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
 
-    <tbody>
-      <% @universities.each do |university| %>
-        <tr>
-          <td><%= university.university_name %></td>
-          <td><%= university.num_nominees %></td>
-          <td><%= university.max_limit %></td>
-          <td><%= link_to 'Show', university %></td>
-          <td><%= link_to 'Edit', edit_university_path(university) %></td>
-          <td><%= link_to 'Delete', delete_university_path(university) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+        <tbody>
+          <% @universities.each do |university| %>
+            <tr>
+              <td><%= university.university_name %></td>
+              <td><%= university.num_nominees %></td>
+              <td><%= university.max_limit %></td>
+              <td><%= button_to 'Show', university, :class => "show-button", :method => :get %></td>
+              <td><%= button_to 'Edit', edit_university_path(university), :class => "edit-button", :method => :get %></td>
+              <td><%= button_to 'Delete', delete_university_path(university), :class => "delete-button", :method => :get %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= link_to 'Reset All', reset_all_universities_path %> |
+      <%= link_to 'Clear All', clear_all_universities_path %>
+    </div>
+  </div>
 
-  <br>
-
-
-
-  <%= link_to 'New University', new_university_path %> |
-  <%= link_to 'Reset All', reset_all_universities_path %> |
-  <%= link_to 'Clear All', clear_all_universities_path %>
-  <br>
-  <br>
-
-  <br>
-  <br>
-
-  <%= link_to 'Universities', universities_path %> |
-  <%= link_to 'Nominators', representatives_path %> |
-  <%= link_to 'Students', students_path %> |
-  <%= link_to 'Questions', questions_path %>
-
+  <div style="margin-left: 20%;">
+    <%= button_to "New University", new_university_path, :class => "create-new-item-button", :method => :get %>
+  </div>
+  
   <br>
   <br>
 </div>

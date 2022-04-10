@@ -57,7 +57,7 @@
               <td><%= representative.first_name %></td>
               <td><%= representative.last_name %></td>
               <td><%= representative.title %></td>
-              <td>realzone</td>
+              <td><%= University.find(representative.university_id).university_name %></td>
               <td><%= representative.rep_email %></td>
               <td class="actions"><%= button_to 'Show', representative_path(representative), :class => "show-button action show", :method => :get %></td>
               <td><%= button_to 'Edit', edit_representative_path(representative), :class => "edit-button", :method => :get %></td>

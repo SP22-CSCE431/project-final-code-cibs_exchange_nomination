@@ -217,6 +217,29 @@ a, a:hover {
   background-color: #FF6666;
 }
 
+.response-button {
+  border: none;
+  width: auto;
+  height: auto;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 1pt;
+  padding-bottom: 1pt;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  transition-duration: 0.2s;
+  cursor: pointer;
+  background-color: #598C9B;
+  color: white;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.64);
+}
+
+.response-button:hover {
+  background-color: #59A4BB;
+}
+
 .form-box {
   padding: 20px 15px 5px 15px;
   border-radius: 12px;

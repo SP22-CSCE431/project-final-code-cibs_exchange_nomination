@@ -58,6 +58,8 @@
       <%= link_to 'Enter another new student', user_new_student_path(@student.representative_id) %> |
     <% end %>
 
-    <%= link_to 'Finish', finish_representative_path(@student.representative_id) %>
+    <div style="margin-left: 10%;">
+      <%= button_to "Finish", finish_representative_path(@student.representative_id), :class => "create-new-item-button", :method => :get %>
+    </div>
   </div>
 </div>
